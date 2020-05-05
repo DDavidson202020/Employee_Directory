@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// Export an object with a "search" method that searches the User API for the passed query
+// Export a method that gets employees from the User API
 export default {
-  search: function(query) {
-    return axios.get("https://randomuser.me/api/?results=100&nat=us" + query);
+  getEmployees() {
+    return axios.get("https://randomuser.me/api/?results=100&nat=us");
   }
 };

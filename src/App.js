@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./components/Header";
-import Table from "./components/Table";
+import Main from "./components/Main";
 
-function Page() {
+function App() {
     return (
         <div>
             <Header />
-            <Table />
+            <Main />
         </div>
     )
 }
-export default Page;
+export default App;
