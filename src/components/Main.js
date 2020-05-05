@@ -41,12 +41,12 @@ class Main extends React.Component {
                             <thead>
                                 <tr>
                                     <th>Image</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>First Name<i className={"fa fa-fw fa-sort"}></i></th>
+                                    <th>Last Name<i className={"fa fa-fw fa-sort"}></i></th>
                                     <th>Email</th>
-                                    <th>Age</th>
+                                    <th>Age<i className={"fa fa-fw fa-sort"}></i></th>
                                     <th>City</th>
-                                    <th>State</th>
+                                    <th>State<i className={"fa fa-fw fa-sort"}></i></th>
                                 </tr>
                             </thead>
                             {employeeInfo}
