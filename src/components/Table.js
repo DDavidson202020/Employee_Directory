@@ -5,7 +5,7 @@ function Table(props) {
 
         <tbody>
             <tr>
-                <td>{props.image}</td>
+                <td><img src={props.image} alt={props.first}></img></td>
                 <td>{props.first}</td>
                 <td>{props.last}</td>
                 <td>{props.email}</td>
