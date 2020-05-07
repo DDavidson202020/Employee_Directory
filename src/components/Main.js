@@ -21,12 +21,11 @@ class Main extends React.Component {
 
     handleInput = (event) => {
         this.setState({ search: event.target.value });
-        //const searchValue = event.target.value;
         //Use the filter method to filter employees according to what user types in 
         const filtered = this.state.employees.filter((employee) => {
 
             return (employee.name.first.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1);
-            //return employee.name.first === searchValue
+            
         })
         // Set the state of filterEmployees 
         this.setState({ filteredEmployees: filtered })
@@ -122,24 +121,6 @@ class Main extends React.Component {
                 />
             )
         })
-        // const filtered = this.state.filteredEmployees.filter((employee) => {
-
-        //     return employee.name.first.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-        // })
-        // const mapOverFilter = filtered.map((person, i) => {
-        //     return (
-        //         <Table
-        //             key={i}
-        //             first={person.name.first}
-        //             last={person.name.last}
-        //             image={person.picture.thumbnail}
-        //             email={person.email}
-        //             age={person.dob.age}
-        //             state={person.location.state}
-        //             city={person.location.city}
-        //         />
-        //     )
-        // })
 
         return (
             <div>
@@ -161,7 +142,7 @@ class Main extends React.Component {
                                     <th>State</th>
                                 </tr>
                             </thead>
-                            {/* if the state of search is true meaning there's input in the search then display what's returned from mapOverFilter, if not display employeeInfo which was declared above the return */}
+                            
                             {employeeInfo}
                         </table>
                     </div>
