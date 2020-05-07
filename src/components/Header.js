@@ -8,7 +8,7 @@ function Header(props) {
             type="text"
             name="search"
             onChange={props.handleInput}
-            placeholder="Enter first or last name"
+            placeholder="Enter first name"
             />
         </div>
     )

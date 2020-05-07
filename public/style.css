@@ -2,3 +2,13 @@
     text-align: center;
     background-color: goldenrod;
 }
+tbody {
+    background-color: rgb(179, 179, 247);
+}
+thead {
+    background-color: rgb(69, 69, 138);
+}
+th {
+    color: wheat;
+    font-size: 20px;
+}
