@@ -1,5 +1,5 @@
 import React from "react";
-
+// a function that returns the header of the page
 function Header(props) {
     return (
         <div className={"jumbotron"}>

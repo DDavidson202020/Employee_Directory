@@ -4,13 +4,14 @@ import Table from "./Table";
 import Header from "./Header";
 import Container from "./Container";
 class Main extends React.Component {
+    // Initalize the state
     state = {
         employees: [],
         search: "",
         filteredEmployees: [],
         isSorted: false
     }
-
+    // React lifecycle method to get data from an API when the page loads
     componentDidMount() {
         API.getEmployees()
             .then(res => {
@@ -18,7 +19,7 @@ class Main extends React.Component {
             })
             .catch(err => console.log(err));
     }
-
+    // Declare a function that handles input change
     handleInput = (event) => {
         this.setState({ search: event.target.value });
         //Use the filter method to filter employees according to what user types in 
@@ -28,7 +29,7 @@ class Main extends React.Component {
         // Set the state of filterEmployees 
         this.setState({ filteredEmployees: filtered })
     }
-
+    // Declare a function that handle the sort by first name
     handleSortFirst = () => {
         // a function that sorts the array according to their first names starting from A,B,C...
         function compare1(a, b) {
@@ -42,7 +43,7 @@ class Main extends React.Component {
             }
             return comparison;
         }
-        // a function that sorts the array according to their last names starting from Z,Y,X...
+        // a function that sorts the array according to their first names starting from Z,Y,X...
         function compare2(a, b) {
             const firstA = a.name.first.toLowerCase();
             const firstB = b.name.first.toLowerCase();
@@ -54,7 +55,7 @@ class Main extends React.Component {
             }
             return comparison;
         }
-
+        // Check to see the current state to sort 
         if (this.state.isSorted) {
             this.state.filteredEmployees.sort(compare1);
             this.setState({
@@ -70,7 +71,7 @@ class Main extends React.Component {
 
         this.setState({ filteredEmployees: this.state.filteredEmployees });
     }
-
+    // Declare a function that handles the sort by last name
     handleSortLast = () => {
         function compare1(a, b) {
             const lastA = a.name.last.toLowerCase();
@@ -94,7 +95,7 @@ class Main extends React.Component {
             }
             return comparison;
         }
-
+        // Check to see the current state to sort 
         if (this.state.isSorted) {
             this.state.filteredEmployees.sort(compare1);
             this.setState({
@@ -110,7 +111,7 @@ class Main extends React.Component {
 
         this.setState({ filteredEmployees: this.state.filteredEmployees });
     }
-
+    // Declare a function that handles sort by age
     handleSortAge = () => {
         function compare1(a, b) {
             const ageA = a.dob.age;
@@ -134,7 +135,7 @@ class Main extends React.Component {
             }
             return comparison;
         }
-
+        // Check to see the current state to sort age
         if (this.state.isSorted) {
             this.state.filteredEmployees.sort(compare1);
             this.setState({
@@ -152,6 +153,7 @@ class Main extends React.Component {
     }
 
     render() {
+        // A variable that stores the result from the map method
         const employeeInfo = this.state.filteredEmployees.map((employee, i) => {
             return (
                 <Table
@@ -187,7 +189,6 @@ class Main extends React.Component {
                                     <th>State</th>
                                 </tr>
                             </thead>
-
                             {employeeInfo}
                         </table>
                     </div>

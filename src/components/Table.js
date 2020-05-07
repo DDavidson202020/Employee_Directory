@@ -1,5 +1,5 @@
 import React from "react";
-
+// a function that returns the table body on the page
 function Table(props) {
     return (
 
