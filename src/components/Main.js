@@ -7,7 +7,7 @@ class Main extends React.Component {
         employees: [],
         search: "",
         filteredEmployees: [],
-        order: "descend"
+        isSorted: false
     }
 
     componentDidMount() {
@@ -23,9 +23,9 @@ class Main extends React.Component {
         this.setState({ search: event.target.value });
         //const searchValue = event.target.value;
         //Use the filter method to filter employees according to what user types in 
-        const filtered = this.state.filteredEmployees.filter((employee) => {
-            return employee.name.first === this.state.search
-            //return employee.name.first.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        const filtered = this.state.employees.filter((employee) => {
+
+            return (employee.name.first.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1);
             //return employee.name.first === searchValue
         })
         // Set the state of filterEmployees 
@@ -34,70 +34,81 @@ class Main extends React.Component {
 
     handleSortFirst = () => {
         // a function that sorts the array according to their first names starting from A,B,C...
-        function compare1(a,b) {
-           const firstA = a.name.first.toLowerCase();
-           const firstB = b.name.first.toLowerCase();
-           let comparison = 0;
-           if (firstA > firstB) {
-               comparison =1;
-           } else if (firstA < firstB) {
-               comparison = -1;
-           }
-           return comparison;
-        }
-        // a function that sorts the array according to their last names starting from Z,Y,X...
-        // function compare2(a,b) {
-        //     const firstA = a.name.first.toLowerCase();
-        //     const firstB = b.name.first.toLowerCase();
-        //     let comparison = 0;
-        //     if (firstA > firstB) {
-        //         comparison =1;
-        //     } else if (firstA < firstB) {
-        //         comparison = -1;
-        //     }
-        //     return comparison * -1;
-        // }
 
-        const sortA = this.state.employees.sort(compare1);
-        //const sortZ = this.state.employees.sort(compare2);
-        this.setState({employees: sortA});
-        //this.setState({employees: sortZ});
+        function compare1(a, b) {
+            const firstA = a.name.first.toLowerCase();
+            const firstB = b.name.first.toLowerCase();
+            let comparison = 0;
+            if (firstA > firstB) {
+                comparison = 1;
+            } else  {
+                comparison = -1;
+            }
+            return comparison;
+        }
+
+        // a function that sorts the array according to their last names starting from Z,Y,X...
+        function compare2(a, b) {
+            const firstA = a.name.first.toLowerCase();
+            const firstB = b.name.first.toLowerCase();
+            let comparison = 0;
+            if (firstB > firstA) {
+                comparison = 1;
+            } else {
+                comparison = -1;
+            }
+            return comparison;
+        }
+        if (this.state.isSorted) {
+            this.state.filteredEmployees.sort(compare1);
+            this.setState({
+                isSorted: false
+            })
+        } else {
+            this.state.filteredEmployees.sort(compare2);
+            this.setState({
+                isSorted: true
+            })
+            
+        }
+        
+        this.setState({ filteredEmployees: this.state.filteredEmployees });
     }
 
     handleSortLast = () => {
-        function compare1(a,b) {
+        function compare1(a, b) {
             const lastA = a.name.last.toLowerCase();
             const lastB = b.name.last.toLowerCase();
             let comparison = 0;
             if (lastA > lastB) {
-                comparison =1;
+                comparison = 1;
             } else if (lastA < lastB) {
                 comparison = -1;
             }
             return comparison;
-         }
-         const sortA = this.state.employees.sort(compare1);
-         this.setState({employees: sortA});
+        }
+        const sortA = this.state.employees.sort(compare1);
+        this.setState({ employees: sortA });
     }
 
     handleSortAge = () => {
-        function compare1(a,b) {
+        function compare1(a, b) {
             const ageA = a.dob.age;
             const ageB = b.dob.age;
             let comparison = 0;
             if (ageA > ageB) {
-                comparison =1;
+                comparison = 1;
             } else if (ageA < ageB) {
                 comparison = -1;
             }
             return comparison;
-         }
-         const sortAge = this.state.employees.sort(compare1);
-         this.setState({employees: sortAge});
+        }
+        const sortAge = this.state.employees.sort(compare1);
+        this.setState({ employees: sortAge });
     }
 
     render() {
-        const employeeInfo = this.state.employees.map((employee, i) => {
+        const employeeInfo = this.state.filteredEmployees.map((employee, i) => {
             return (
                 <Table
                     key={i}
@@ -111,7 +122,24 @@ class Main extends React.Component {
                 />
             )
         })
+        // const filtered = this.state.filteredEmployees.filter((employee) => {
 
+        //     return employee.name.first.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        // })
+        // const mapOverFilter = filtered.map((person, i) => {
+        //     return (
+        //         <Table
+        //             key={i}
+        //             first={person.name.first}
+        //             last={person.name.last}
+        //             image={person.picture.thumbnail}
+        //             email={person.email}
+        //             age={person.dob.age}
+        //             state={person.location.state}
+        //             city={person.location.city}
+        //         />
+        //     )
+        // })
 
         return (
             <div>
@@ -133,8 +161,8 @@ class Main extends React.Component {
                                     <th>State</th>
                                 </tr>
                             </thead>
-                            {/* if the state of search is true meaning there's input in the search then display the filteredEmployees, if not display employeeInfo which was declared above the return */}
-                            {this.state.search ? this.handleInput : employeeInfo}
+                            {/* if the state of search is true meaning there's input in the search then display what's returned from mapOverFilter, if not display employeeInfo which was declared above the return */}
+                            {employeeInfo}
                         </table>
                     </div>
                 </div>
