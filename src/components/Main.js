@@ -33,7 +33,7 @@ class Main extends React.Component {
     }
 
     handleSortFirst = () => {
-        // a function that sorts the array according to their first names
+        // a function that sorts the array according to their first names starting from A,B,C...
         function compare1(a,b) {
            const firstA = a.name.first.toLowerCase();
            const firstB = b.name.first.toLowerCase();
@@ -45,7 +45,7 @@ class Main extends React.Component {
            }
            return comparison;
         }
-        // a function that sorts the array according to their last names
+        // a function that sorts the array according to their last names starting from Z,Y,X...
         // function compare2(a,b) {
         //     const firstA = a.name.first.toLowerCase();
         //     const firstB = b.name.first.toLowerCase();
@@ -65,7 +65,35 @@ class Main extends React.Component {
     }
 
     handleSortLast = () => {
+        function compare1(a,b) {
+            const lastA = a.name.last.toLowerCase();
+            const lastB = b.name.last.toLowerCase();
+            let comparison = 0;
+            if (lastA > lastB) {
+                comparison =1;
+            } else if (lastA < lastB) {
+                comparison = -1;
+            }
+            return comparison;
+         }
+         const sortA = this.state.employees.sort(compare1);
+         this.setState({employees: sortA});
+    }
 
+    handleSortAge = () => {
+        function compare1(a,b) {
+            const ageA = a.dob.age;
+            const ageB = b.dob.age;
+            let comparison = 0;
+            if (ageA > ageB) {
+                comparison =1;
+            } else if (ageA < ageB) {
+                comparison = -1;
+            }
+            return comparison;
+         }
+         const sortAge = this.state.employees.sort(compare1);
+         this.setState({employees: sortAge});
     }
 
     render() {
@@ -100,7 +128,7 @@ class Main extends React.Component {
                                     <th>First Name<i onClick={this.handleSortFirst} className={"fa fa-fw fa-sort"}></i></th>
                                     <th>Last Name<i onClick={this.handleSortLast} className={"fa fa-fw fa-sort"}></i></th>
                                     <th>Email</th>
-                                    <th>Age<i className={"fa fa-fw fa-sort"}></i></th>
+                                    <th>Age<i onClick={this.handleSortAge} className={"fa fa-fw fa-sort"}></i></th>
                                     <th>City</th>
                                     <th>State</th>
                                 </tr>
